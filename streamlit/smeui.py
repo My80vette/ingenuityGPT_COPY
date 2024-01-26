@@ -1,32 +1,21 @@
 import streamlit as st
+from streamlit_chatbox import *
 
-st.title('Mars Ingenuity SME')
+chat_box = ChatBox()
 
-chatTab, chatHistoryTab = st.tabs(["Chat", "Chat History"])
+# tabs relocated to sidebar (nonfunctional currently)
+with st.sidebar:
+    st.title('Mars Ingenuity SME')
+    st.button('Chat', key='chatTab')
+    st.button('Chat History', key='chatHistoryTab')
 
-# main view with text-message style display of current model conversation.
-with chatTab:
-    messageCol, sendCol = st.columns([6, 1])
-    with messageCol:
-        st.text_area('', key='message')
-    with sendCol:
-        st.button('Send', key='send')
-    if st.session_state.get('send'):
-        st.write(st.session_state['message'])
-            
-        
+# simple chat box structure
+chat_box.init_session()
+chat_box.output_messages()
 
-# view of previous, possibly continuable chats (stretch goal)
-with chatHistoryTab:
-    st.write('This is the chat history view.')
+if query := st.chat_input('input your question here'):
+    chat_box.user_say(query)
+    chat_box.ai_say('you said: ' + query)
 
-    # if st.session_state.get('clear'):
-    #     st.session_state['name'] = ''
-    # if st.session_state.get('streamlit'):
-    #     st.session_state['name'] = 'Streamlit'
-
-    # st.text_input('Name', key='name')
-
-    # st.button('Clear name', key='clear')
-    # st.button('Streamlit!', key='streamlit')
-
+# working on tempurature slider
+# temperature = st.slider('Response Temperature', 0, 100, 50)
