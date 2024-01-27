@@ -43,4 +43,5 @@ elif st.session_state.get("optionsTab"):
     currentTab = "optionsTab"
     displayView()
 else:
-    pass
+    currentTab = "chatTab"
+    displayView()
