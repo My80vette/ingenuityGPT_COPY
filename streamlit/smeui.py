@@ -1,7 +1,12 @@
+from pathlib import Path
 import streamlit as st
 from streamlit_chatbox import *
+from loguru import logger
+
 
 currentTab = "chatTab"
+logname = "log.txt"
+
 
 # different views selectable from sidebar
 with st.sidebar:
@@ -12,6 +17,15 @@ with st.sidebar:
     # variable logging for debug purposes
     # st.write(st.session_state)
     # st.write(currentTab)
+
+
+# basic logging code (need more in depth, duplicate logging issues, etc.)
+
+# logger.add(logname)
+# logger.debug("This is a debug message")
+# st.write("Does the log file work? Last 10 lines")
+# lines = "\n".join(Path(logname).read_text().splitlines()[-10:])
+# st.code(lines)
 
 
 def displayView():
